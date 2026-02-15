@@ -1,0 +1,105 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Center everything */
+body {
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+/* Container for all elements */
+.login-container {
+    text-align: center;
+}
+
+/* Logo */
+.logo img {
+    width: 250px;
+    margin-bottom: 0px;
+}
+
+/* Login Box */
+.login-box {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px 40px;
+    border-radius: 15px;
+    width: 420px;
+    height: 300px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin: 0 auto;
+}
+
+.login-box h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Input groups */
+.input-group {
+    display: flex;
+    align-items: center;
+    background: #f1f1f1;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 15px;
+    position: relative;
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.input-group i {
+    color: #666;
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+/* Text fields */
+.input-group input {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Password toggle icon */
+.password-group #togglePassword {
+    position: absolute;
+    right: 12px;
+    cursor: pointer;
+    color: #666;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.password-group #togglePassword:hover {
+    color: #000;
+}
+
+/* Login Button */
+.login-btn {    
+    background-color: #FFE56B;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 70px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.login-btn:hover {
+    background-color: rgb(153, 130, 1);
+}
+

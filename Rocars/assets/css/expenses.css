@@ -1,0 +1,200 @@
+/* Base Styles */
+body { 
+    font-family: 'Poppins', sans-serif; /* Matching your index file */
+    margin: 0;
+    background-color: #f8f9fa;
+    color: #2b2b2b;
+    line-height: 1.6;
+}
+
+/* -------------------- MAIN CONTENT LAYOUT -------------------- */
+/* This handles the relationship with the sidebar */
+.main-content {
+
+    transition: margin-left 0.3s ease;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* -------------------- TABLE CONTAINER -------------------- */
+.table-responsive {
+    overflow-x: auto; 
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background: white;
+    border: 1px solid #e0e0e0;
+    
+}
+
+
+.table-wrapper{
+    margin: 1.5%;
+    border-collapse: separate;
+    overflow: hidden;  
+    border-radius: 10px;
+    
+}
+
+/* -------------------- TABLE HEADER -------------------- */
+th {
+    background: #2b2b2b;
+    color: #ffffff !important; 
+    padding: 15px 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-align: left;
+    position: sticky;
+    top: 0;
+}
+
+/* -------------------- TABLE ROWS -------------------- */
+td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #e0e0e0;
+    color: #000000 !important; /* Force black text color */
+    font-size: 14px;
+}
+
+tr:hover {
+    background-color: #f1f3f5;
+    transition: 0.2s ease;
+}
+
+tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* -------------------- FILTER BAR -------------------- */
+.filter-container {
+    background: #ffffff;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1; /* Allows inputs to grow and fill space */
+    min-width: 200px; /* Reduced from 400px to prevent overflow */
+}
+
+.filter-group label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+}
+
+.filter-group input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+}
+
+.filter-group input:focus {
+    border-color: #2b2b2b;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.05);
+}
+
+/* -------------------- BUTTONS -------------------- */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.btn {
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+}
+
+.btn-gray { background: #f8f9fa; color: #333; }
+.btn-primary { background: #2b2b2b; color: white; border-color: #1a1a1a; }
+.btn-secondary { background: #fff; color: #dc3545; border-color: #dc3545; }
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* -------------------- PAGINATION -------------------- */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin: 30px 0;
+    padding-bottom: 20px;
+}
+
+.page-btn {
+    padding: 8px 14px;
+    border: 1px solid #ddd;
+    background: white;
+    color: #333;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.page-btn.active {
+    background: #2b2b2b;
+    color: white;
+    border-color: #2b2b2b;
+}
+
+.page-btn:hover:not(.active) {
+    background: #e9ecef;
+}
+
+.delete-btn{
+    cursor: pointer;
+}
+
+.editBtn{
+    cursor: pointer;
+}
+
+/* -------------------- RESPONSIVE -------------------- */
+@media (max-width: 1024px) {
+    .main-content {
+        margin-left: 70px; /* Space for collapsed sidebar */
+    }
+}
+
+@media (max-width: 768px) {
+    .filter-group {
+        min-width: 100%; /* Stacks filters on mobile */
+    }
+    
+    th, td {
+        padding: 10px 8px;
+        font-size: 12px;
+    }
+}
