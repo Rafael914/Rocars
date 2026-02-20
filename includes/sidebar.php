@@ -17,9 +17,9 @@ $branch_result = $conn->query($branch_query);
 // --- PERMISSIONS ---
 $menu_permissions = [
     'index.php'            => ['master_admin', 'admin_staff'],
-    'getProducts.php'          => ['master_admin', 'admin_staff', 'inventory_staff'],
-    'saleslistIndex.php'       => ['master_admin', 'admin_staff', 'inventory_staff'],
-    'inventorysearchmodal.php' => ['master_admin', 'admin_staff', 'inventory_staff'],
+    'getProducts.php'          => ['master_admin', 'admin_staff', 'inventory_staff','cashier'],
+    'saleslistIndex.php'       => ['master_admin', 'admin_staff', 'inventory_staff', 'cashier'],
+    'inventorysearchmodal.php' => ['master_admin', 'admin_staff', 'inventory_staff', 'cashier'],
     'mechanicsIndex.php'       => ['master_admin', 'admin_staff'],
     'expensesIndex.php'        => ['master_admin', 'admin_staff'],
     'activitylogIndex.php'     => ['master_admin', 'admin_staff'],

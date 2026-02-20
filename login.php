@@ -6,7 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-
+// Redirect if already logged in
 if (isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();
@@ -26,10 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $username = sanitizeInput($_POST['username']);
-    $password = $_POST['password']; 
+    $password = $_POST['password'];
 
     $stmt = $conn->prepare("
-        SELECT u.user_id, u.username, u.role, u.password, u.branch_id, b.branch_name, u.archived_at
+        SELECT u.user_id, u.username, u.role, u.password, 
+               u.branch_id, b.branch_name, u.archived_at,
+               u.failed_attempts, u.lock_until
         FROM users u
         JOIN branches b ON u.branch_id = b.branch_id
         WHERE u.username = ?
@@ -42,15 +44,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result->num_rows === 1) {
         $row = $result->fetch_assoc();
 
- 
-        if (!is_null($row['archived_at']) && $row['archived_at'] != 0) {
+        // Check if archived
+        if (!is_null($row['archived_at'])) {
             $_SESSION['invalid'] = "This account is archived and cannot login.";
             header("Location: " . $_SERVER["PHP_SELF"]);
             exit();
         }
 
+        // Check lock
+        if (!is_null($row['lock_until']) && strtotime($row['lock_until']) > time()) {
+            $remaining = strtotime($row['lock_until']) - time();
+            $minutes = ceil($remaining / 60);
+            $_SESSION['invalid'] = "Too many failed attempts. Try again in {$minutes} minute(s).";
+            header("Location: " . $_SERVER["PHP_SELF"]);
+            exit();
+        }
 
+        // Check password
         if (password_verify($password, $row['password'])) {
+
+            // Reset failed attempts on success
+            $reset = $conn->prepare("
+                UPDATE users
+                SET failed_attempts = 0, lock_until = NULL
+                WHERE user_id = ?
+            ");
+            $reset->bind_param("i", $row['user_id']);
+            $reset->execute();
 
             session_regenerate_id(true);
 
@@ -60,29 +80,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['username']    = $row['username'];
             $_SESSION['role']        = $row['role'];
 
-            unset($_SESSION['invalid']);
-
-                auditLog(
-            $conn,
-            $_SESSION['user_id'],
-            'LOGIN',
-            'users',
-            $_SESSION['user_id'],
-            $_SESSION['username'] . 'was logged in'
-        );
+            auditLog(
+                $conn,
+                $_SESSION['user_id'],
+                'LOGIN',
+                'users',
+                $_SESSION['user_id'],
+                $_SESSION['username'] . ' was logged in'
+            );
 
             header("Location: index.php");
             exit();
         }
+
+        // Wrong password → increment failed attempts
+        $attempts = $row['failed_attempts'] + 1;
+        $maxAttempts = 5;
+
+        if ($attempts >= $maxAttempts) {
+            $lockUntil = date("Y-m-d H:i:s", strtotime("+3 minutes"));
+            $update = $conn->prepare("
+                UPDATE users
+                SET failed_attempts = ?, lock_until = ?
+                WHERE user_id = ?
+            ");
+            $update->bind_param("isi", $attempts, $lockUntil, $row['user_id']);
+            $update->execute();
+
+            $_SESSION['invalid'] = "Too many failed attempts. Account locked for 3 minutes.";
+        } else {
+            $update = $conn->prepare("
+                UPDATE users
+                SET failed_attempts = ?
+                WHERE user_id = ?
+            ");
+            $update->bind_param("ii", $attempts, $row['user_id']);
+            $update->execute();
+
+            $_SESSION['invalid'] = "Invalid username or password. Attempt {$attempts}/{$maxAttempts}.";
+        }
+
+        header("Location: " . $_SERVER["PHP_SELF"]);
+        exit();
     }
 
-    // Invalid login
-    $_SESSION['invalid'] = "Invalid username or password";
+    // User not found
+    $_SESSION['invalid'] = "Invalid username or password.";
     header("Location: " . $_SERVER["PHP_SELF"]);
     exit();
 }
-
-    
 ?>
 
 <!DOCTYPE html>

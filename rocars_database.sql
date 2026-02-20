@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2026 at 05:11 AM
+-- Generation Time: Feb 20, 2026 at 04:20 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -61,9 +61,9 @@ INSERT INTO `accessories_details` (`accessories_id`, `product_id`, `typeofaccess
 CREATE TABLE `audit_logs` (
   `audit_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `action` enum('ADD','UPDATE','DELETE','RESTORE','ARCHIVE') NOT NULL,
+  `action` enum('ADD','UPDATE','DELETE','RESTORE','ARCHIVE','LOGIN','EXPORT') NOT NULL,
   `table_name` varchar(50) NOT NULL,
-  `record_id` int(11) NOT NULL,
+  `record_id` int(11) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -92,9 +92,16 @@ INSERT INTO `audit_logs` (`audit_id`, `user_id`, `action`, `table_name`, `record
 (271, 5, 'DELETE', 'expenses', 35, 'Deleted expense ID: 35 (Amount: 1500.00, Category: Receipt Attached, Date: 0000-00-00 00:00:00)', '2026-01-17 03:13:35'),
 (272, 5, 'DELETE', 'expenses', 62, 'Deleted expense ID: 62 (Amount: 99999999.99, Category: paid, Date: 0000-00-00 00:00:00)', '2026-01-17 03:13:37'),
 (273, 5, 'DELETE', 'expenses', 67, 'Deleted expense ID: 67 (Amount: 10000.00, Category: PAID, Date: 0000-00-00 00:00:00)', '2026-01-17 03:13:39'),
-(274, 5, 'DELETE', 'expenses', 69, 'Deleted expense ID: 69 (Amount: 4554.00, Category: PAID, Date: 0000-00-00 00:00:00)', '2026-01-17 03:13:41'),
-(275, 5, 'UPDATE', 'expenses', 73, 'Updated expense ID 73: Amount updated', '2026-01-17 03:25:56'),
-(276, 5, 'UPDATE', 'products', 140, 'Updated tire \'APOLLO265/60R18\': Price 43.00 → 6500', '2026-01-17 04:46:12');
+(296, 5, 'LOGIN', 'users', 5, 'Rafael215was logged in', '2026-02-20 22:34:12'),
+(297, 5, 'EXPORT', 'users', 5, 'Rafael215 was export the activitylog', '2026-02-20 22:41:41'),
+(298, 5, 'LOGIN', 'users', 5, 'Rafael215 was logged in', '2026-02-20 23:08:49'),
+(299, 5, 'LOGIN', 'users', 5, 'Rafael215 was logged in', '2026-02-20 23:09:16'),
+(300, 5, 'ARCHIVE', 'users', 13, 'User archived: raffy', '2026-02-20 23:09:30'),
+(301, 5, 'ARCHIVE', 'users', 14, 'User archived: luoie caballero', '2026-02-20 23:09:33'),
+(302, 5, 'ARCHIVE', 'users', 15, 'User archived: Jerelyn Abantao', '2026-02-20 23:09:37'),
+(303, 5, 'ARCHIVE', 'users', 5, 'User archived: Rafael Rodelas', '2026-02-20 23:09:43'),
+(304, 5, 'RESTORE', 'users', 5, 'User account restored: Rafael Rodelas', '2026-02-20 23:09:50'),
+(305, 5, 'LOGIN', 'users', 5, 'Rafael215 was logged in', '2026-02-20 23:17:24');
 
 -- --------------------------------------------------------
 
@@ -243,8 +250,7 @@ INSERT INTO `expenses` (`expense_id`, `branch_id`, `month_name`, `date`, `amount
 (70, 2, 'January', '2026-01-17 03:12:57', 45654.00, '65465', 4654.00, 'WITH APPROVAL', '654', '654', '65'),
 (71, 2, 'January', '2026-01-17 03:22:41', 5000.00, 'MERALCO', 5000.00, 'WITH APPROVAL', 'RETAIL EXPENSES', '654', 'SDF'),
 (72, 2, 'January', '2026-01-17 03:24:51', 5000.00, 'MAYNILAD', 5000.00, 'WITH RECEIPT', 'RETAIL EXPENSES', 'NONE', 'NONE'),
-(73, 2, 'January', '2026-01-17 03:25:42', 5000.00, 'FOOD', 5000.00, 'WITH RECEIPT', 'NONE', 'NONE', 'NONE'),
-(74, 2, 'January', '2026-01-17 14:08:51', 600.00, '', 0.00, '', '', '', '');
+(73, 2, 'January', '2026-01-17 03:25:42', 5200.00, 'FOOD', 5200.00, 'WITH RECEIPT', 'NONE', 'NONE', 'NONE');
 
 -- --------------------------------------------------------
 
@@ -296,9 +302,9 @@ INSERT INTO `inventory` (`inventory_id`, `branch_id`, `product_id`, `quantity`) 
 (53, 1, 49, 3),
 (127, 2, 127, 6),
 (137, 2, 137, 43),
-(140, 2, 140, 22),
+(140, 2, 140, 7),
 (141, 2, 141, 9),
-(142, 2, 142, 20),
+(142, 2, 142, 19),
 (143, 2, 143, 50),
 (144, 2, 144, 50),
 (145, 2, 145, 50),
@@ -311,7 +317,7 @@ INSERT INTO `inventory` (`inventory_id`, `branch_id`, `product_id`, `quantity`) 
 (152, 2, 152, 100),
 (153, 2, 153, 150),
 (154, 2, 154, 56),
-(155, 2, 155, 9);
+(155, 2, 155, 15);
 
 -- --------------------------------------------------------
 
@@ -575,7 +581,8 @@ INSERT INTO `sales` (`sales_id`, `si_number`, `date`, `mechanic_id`, `category`,
 (354, '4654', '2026-01-17 13:55:03', 1, 'NONE', 1, 'Service', 'RAFAEL RODELAS', '0', 'GHJ456', 'NONE', '0947756184564', 768.00, 0.00, 768.00, 'NONE', '0', 0.00, 0.00, 2, 'Cash', 'NONE'),
 (355, '2345', '2026-01-17 13:59:20', 1, 'tire', 1, 'APOLLO235/75R15', 'JEANN', 'szfdsfs', 'RT6', '', '0989', 9000.00, 7000.05, 1999.95, '', '', 0.00, 0.00, 2, 'Cash', ''),
 (356, '2345', '2026-01-17 13:59:20', 1, 'tire', 1, 'APOLLO265/70R16', 'JEANN', 'szfdsfs', 'RT6', '', '0989', 279.00, 6800.00, -6521.00, '', '', 0.00, 0.00, 2, 'Cash', ''),
-(357, '2345', '2026-01-17 13:59:20', 1, 'Service', 1, '100', 'JEANN', 'szfdsfs', 'RT6', '', '0989', 100.00, 100.00, 0.00, '', '', 0.00, 0.00, 2, 'Cash', '');
+(357, '2345', '2026-01-17 13:59:20', 1, 'Service', 1, '100', 'JEANN', 'szfdsfs', 'RT6', '', '0989', 100.00, 100.00, 0.00, '', '', 0.00, 0.00, 2, 'Cash', ''),
+(358, '46546456', '2026-02-18 13:05:53', 1, 'tire', 1, 'ATLAS235/75R15', 'Rafael Rodelas', 'Mustang', '263826', '454', '09475618537', 4800.00, 4500.00, 300.00, '6546', '263826', 100.00, 80.00, 2, 'Cash', 'Order of rafael Rodelas for production');
 
 -- --------------------------------------------------------
 
@@ -666,19 +673,19 @@ CREATE TABLE `users` (
   `fullname` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `archived_at` timestamp NULL DEFAULT NULL
+  `archived_at` timestamp NULL DEFAULT NULL,
+  `failed_attempts` int(11) DEFAULT 0,
+  `lock_until` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `password`, `role`, `contact_number`, `branch_id`, `email`, `fullname`, `created_at`, `updated_at`, `archived_at`) VALUES
-(5, 'Rafael215', '$2y$10$BqG8pOt3ZnKWBeb0.MzkdeqZfhOVWpVjkuqFK24WzJ1Q1wgpoAFHW', 'master_admin', '09475618533231', 2, 'rafaelrodelas88@gmail.com', 'Rafael Rodelas', '2025-12-30 18:36:51', '2026-01-17 00:41:39', NULL),
-(9, 'Rafael', '$2y$10$7pPZqNgYifYfhZTKI8GKZOSSogIKbEsLG02xy/NIGVGbWvzRqj7.e', 'admin_staff', '09475618537', 2, 'rafaelrodelas88@gmail.com', 'rafael rodelas', '2026-01-02 14:40:15', '2026-01-16 19:47:44', '2026-01-12 18:32:20'),
-(13, 'raffy4545', '$2y$10$SON6gxTaihYSHaUkcPeRX.D0ljrVDmEhCiawh/C6B9kLTS97Nq94C', 'inventory_staff', '09475618536', 2, 'rafaelrodelas88@gmail.com', 'raffy', '2026-01-03 12:54:00', '2026-01-17 02:49:43', NULL),
-(14, 'louie215', '$2y$10$03ofXlXtDEnz.ZX.9r0qh.X8qnPLtiFuSMI.Rn4MkLKknwu5N2WpK', 'admin_staff', '09785464782', 2, 'luoie@gmail.com', 'luoie caballero', '2026-01-16 19:51:25', '2026-01-16 20:02:07', NULL),
-(15, 'jerelyn', '$2y$10$Lehth0atQEG1kXJnB3MgPexLxIy1dxFT2uGq4f6nFbwcvdZy709ku', 'inventory_staff', '09475618537', 2, 'jerelyn@gmail.com', 'Jerelyn Abantao', '2026-01-17 00:25:47', '2026-01-17 00:25:47', NULL);
+INSERT INTO `users` (`user_id`, `username`, `password`, `role`, `contact_number`, `branch_id`, `email`, `fullname`, `created_at`, `updated_at`, `archived_at`, `failed_attempts`, `lock_until`) VALUES
+(5, 'Rafael215', '$2y$10$BqG8pOt3ZnKWBeb0.MzkdeqZfhOVWpVjkuqFK24WzJ1Q1wgpoAFHW', 'master_admin', '09475618533231', 2, 'rafaelrodelas88@gmail.com', 'Rafael Rodelas', '2025-12-30 18:36:51', '2026-02-20 15:17:24', NULL, 0, NULL),
+(16, 'JerelynHeart', '$2y$10$kfxChTtfU6WQdWNO2Xf.Veu3sb1ZV3dJHUHyW2SBaGXmJhb7Vdogu', 'admin_staff', '09478731589', 2, 'jerelyn@gmail.com', 'Jerelyn Abantao', '2026-02-20 15:11:23', '2026-02-20 15:17:01', NULL, 5, '2026-02-20 08:20:01'),
+(17, 'Louie56', '$2y$10$/nBYs6Q2bzb2JzKNYOso4uvcStCAF0T79JPQxoPdFabDhqWQ0rOjy', 'admin_staff', '09678961234', 2, 'Louie@gmail.com', 'Louie Caballero', '2026-02-20 15:15:39', '2026-02-20 15:15:39', NULL, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -871,7 +878,7 @@ ALTER TABLE `accessories_details`
 -- AUTO_INCREMENT for table `audit_logs`
 --
 ALTER TABLE `audit_logs`
-  MODIFY `audit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=277;
+  MODIFY `audit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=306;
 
 --
 -- AUTO_INCREMENT for table `battery_details`
@@ -967,7 +974,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `sales_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=358;
+  MODIFY `sales_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=359;
 
 --
 -- AUTO_INCREMENT for table `sales_items`
@@ -991,7 +998,7 @@ ALTER TABLE `tire_details`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `wheelweights_details`
