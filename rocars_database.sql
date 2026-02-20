@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2026 at 04:20 PM
+-- Generation Time: Feb 20, 2026 at 04:50 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -101,7 +101,13 @@ INSERT INTO `audit_logs` (`audit_id`, `user_id`, `action`, `table_name`, `record
 (302, 5, 'ARCHIVE', 'users', 15, 'User archived: Jerelyn Abantao', '2026-02-20 23:09:37'),
 (303, 5, 'ARCHIVE', 'users', 5, 'User archived: Rafael Rodelas', '2026-02-20 23:09:43'),
 (304, 5, 'RESTORE', 'users', 5, 'User account restored: Rafael Rodelas', '2026-02-20 23:09:50'),
-(305, 5, 'LOGIN', 'users', 5, 'Rafael215 was logged in', '2026-02-20 23:17:24');
+(305, 5, 'LOGIN', 'users', 5, 'Rafael215 was logged in', '2026-02-20 23:17:24'),
+(306, 16, 'LOGIN', 'users', 16, 'JerelynHeart was logged in', '2026-02-20 23:24:16'),
+(307, 17, 'LOGIN', 'users', 17, 'Louie56 was logged in', '2026-02-20 23:24:49'),
+(308, 5, 'LOGIN', 'users', 5, 'Rafael215 was logged in', '2026-02-20 23:33:48'),
+(309, 5, 'EXPORT', 'users', 5, 'Rafael215 was export the activitylog', '2026-02-20 23:33:55'),
+(310, 5, 'LOGIN', 'users', 5, 'Rafael215 was logged in', '2026-02-20 23:36:56'),
+(311, 5, 'LOGIN', 'users', 5, 'Rafael215 was logged in', '2026-02-20 23:40:52');
 
 -- --------------------------------------------------------
 
@@ -683,9 +689,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `role`, `contact_number`, `branch_id`, `email`, `fullname`, `created_at`, `updated_at`, `archived_at`, `failed_attempts`, `lock_until`) VALUES
-(5, 'Rafael215', '$2y$10$BqG8pOt3ZnKWBeb0.MzkdeqZfhOVWpVjkuqFK24WzJ1Q1wgpoAFHW', 'master_admin', '09475618533231', 2, 'rafaelrodelas88@gmail.com', 'Rafael Rodelas', '2025-12-30 18:36:51', '2026-02-20 15:17:24', NULL, 0, NULL),
-(16, 'JerelynHeart', '$2y$10$kfxChTtfU6WQdWNO2Xf.Veu3sb1ZV3dJHUHyW2SBaGXmJhb7Vdogu', 'admin_staff', '09478731589', 2, 'jerelyn@gmail.com', 'Jerelyn Abantao', '2026-02-20 15:11:23', '2026-02-20 15:17:01', NULL, 5, '2026-02-20 08:20:01'),
-(17, 'Louie56', '$2y$10$/nBYs6Q2bzb2JzKNYOso4uvcStCAF0T79JPQxoPdFabDhqWQ0rOjy', 'admin_staff', '09678961234', 2, 'Louie@gmail.com', 'Louie Caballero', '2026-02-20 15:15:39', '2026-02-20 15:15:39', NULL, 0, NULL);
+(5, 'Rafael215', '$2y$10$BqG8pOt3ZnKWBeb0.MzkdeqZfhOVWpVjkuqFK24WzJ1Q1wgpoAFHW', 'master_admin', '09475618533231', 2, 'rafaelrodelas88@gmail.com', 'Rafael Rodelas', '2025-12-30 18:36:51', '2026-02-20 15:40:52', NULL, 0, NULL),
+(16, 'JerelynHeart', '$2y$10$kfxChTtfU6WQdWNO2Xf.Veu3sb1ZV3dJHUHyW2SBaGXmJhb7Vdogu', 'admin_staff', '09478731589', 2, 'jerelyn@gmail.com', 'Jerelyn Abantao', '2026-02-20 15:11:23', '2026-02-20 15:24:16', NULL, 0, NULL),
+(17, 'Louie56', '$2y$10$/nBYs6Q2bzb2JzKNYOso4uvcStCAF0T79JPQxoPdFabDhqWQ0rOjy', 'inventory_staff', '09678961234', 2, 'Louie@gmail.com', 'Louie Caballero', '2026-02-20 15:15:39', '2026-02-20 15:24:35', NULL, 0, NULL),
+(18, 'Nico21', '$2y$10$agnWI0LnJ8kBG0ubSPP6HuIqN.wrdi/7YJlHm/630Y0cB0YX6d/SK', 'cashier', '09585566324', 2, 'Nico@gmail.com', 'Nico Robin', '2026-02-20 15:45:25', '2026-02-20 15:45:25', NULL, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -878,7 +885,7 @@ ALTER TABLE `accessories_details`
 -- AUTO_INCREMENT for table `audit_logs`
 --
 ALTER TABLE `audit_logs`
-  MODIFY `audit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=306;
+  MODIFY `audit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=312;
 
 --
 -- AUTO_INCREMENT for table `battery_details`
@@ -998,7 +1005,7 @@ ALTER TABLE `tire_details`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `wheelweights_details`

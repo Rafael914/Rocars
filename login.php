@@ -6,18 +6,15 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Redirect if already logged in
 if (isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();
 }
 
-// Generate CSRF token if not set
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
-// Handle POST login
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // CSRF check
@@ -60,10 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
 
-        // Check password
+   
         if (password_verify($password, $row['password'])) {
 
-            // Reset failed attempts on success
+         
             $reset = $conn->prepare("
                 UPDATE users
                 SET failed_attempts = 0, lock_until = NULL
@@ -124,7 +121,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // User not found
     $_SESSION['invalid'] = "Invalid username or password.";
     header("Location: " . $_SERVER["PHP_SELF"]);
     exit();
