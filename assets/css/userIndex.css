@@ -1,0 +1,906 @@
+.main-wrapper {
+    padding: 20px;
+    background: #fff;
+    border-radius: 13px;
+    box-shadow: 0 4px 6px rgba(0,0,0,.05);
+    
+}
+.top-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    gap:4px;
+    
+}
+.search-box {
+    padding: 10px;
+    border: 1px solid rgb(26, 24, 24);
+    border-radius: 8px;
+    flex:1;
+    display:flex;
+}
+
+/* TABLE WRAPPER FOR HORIZONTAL SCROLL */
+.table-wrapper {
+    overflow-x: auto;
+    width: 100%;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    table-layout: fixed; /* prevents cells from growing too wide */
+    overflow:hidden;
+    border-radius:10px;
+    font-size:0.9rem;
+}
+thead th {
+    background: #2b2b2b;
+    color: #fff;
+    padding: 12px;
+    border-bottom: 2px solid #e2e8f0;
+    font-size: .75rem;
+    word-wrap: break-word;
+}
+tbody tr {
+    background: #fff;
+    transition: background .2s ease;
+}
+tbody tr:hover {
+    background: #f1f5f9;
+}
+td {
+    color: #000 !important;
+    padding: 12px;
+    border-bottom: 1px solid #f1f5f9;
+    text-align:center;
+    word-wrap: break-word; /* allow breaking long text */
+    overflow: hidden;
+}
+td:first-child {
+    font-weight: 600;
+}
+td:last-child {
+    white-space: nowrap;
+}
+
+/* BUTTONS */
+.btn-edit {
+    background: #eff6ff;
+    color: #2563eb;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.btn-archive {
+    background: #fff1f2;
+    color: #e11d48;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-restore{
+    background: #84d884ff;
+    color: #052bffff;
+    border: none;
+    padding: 7px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+
+/* PAGINATION */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+.pagination a {
+    padding: 8px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+}
+.pagination a.active {
+    background: #3b82f6;
+    color: #fff;
+    border: none;
+}
+
+.class{
+    padding:9px;
+    background:white;
+    background: #2b2b2b;
+    border-radius:5px;
+    border:1px solid #8d8181ff;
+    color:white;
+}
+
+
+
+h2 {
+    margin-top: 30px; 
+    margin-bottom: 10px;
+    color:black;
+}
+
+
+.addbranchModal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5); /* overlay */
+    backdrop-filter: blur(3px);
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.addBranchContent {
+    background-color: #f1f1f1;
+    margin: 10% auto;
+    width: 400px;
+    max-width: 90%;
+    border-radius: 15px;
+    overflow: hidden; 
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+/* Top black header */
+.addBranchHeader {
+    background-color: #000; /* Full black top header */
+    padding: 20px;
+    text-align: center;
+}
+
+/* H3 inside header */
+.addBranchHeader h3 {
+    color: #fff;
+    margin: 0;
+}
+
+/* Close button */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #ff4d4d;
+}
+
+/* Labels and input fields */
+.addBranchContent .labels {
+    display: block;
+    margin: 15px 20px 5px;
+    font-weight: 500;
+}
+
+.addBranchContent input[type="text"] {
+    width: calc(100% - 40px);
+    margin: 0 20px 20px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* Button styling */
+.addBranchContent button {
+    display: block;
+    width: calc(100% - 40px);
+    margin: 0 20px 20px;
+    padding: 12px;
+     background-color: #282928;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.addBranchContent button:hover {
+     background-color: #000000;
+}
+
+.createAccountModal{
+    display: none; 
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5); 
+    backdrop-filter: blur(3px);
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(3px);
+
+}
+
+.createContent {
+    background-color: #f1f1f1; /* Light background for content */
+    margin: 10% auto;
+    width: 400px;
+    max-width: 90%;
+    border-radius: 15px;
+    overflow: hidden; /* To keep header inside rounded corners */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+
+.addcontentHeader {
+    background-color: #000; /* Full black top header */
+    padding: 20px;
+    text-align: center;
+}
+
+/* H3 inside header */
+.addcontentHeader h3 {
+    color: #fff;
+    margin: 0;
+}
+
+/* Close button */
+.addBranchContent.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.addBranchContent .close:hover {
+    color: #ff4d4d;
+}
+
+
+.addBranchContent .labels {
+    display: block;
+    margin: 15px 20px 5px;
+    font-weight: 500;
+}
+
+.addBranchContent input[type="text"] {
+    width: calc(100% - 40px);
+    margin: 0 20px 20px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    box-sizing: border-box;
+}
+
+
+/* The container for the two inputs */
+.input-row {
+    display: flex;
+    gap: 20px;       /* Space between the two inputs */
+    margin-bottom: 15px; /* Space below the row */
+    padding:10px;
+}
+
+/* Ensure each group takes up equal space */
+.form-group {
+    flex: 1;         /* This makes both divs grow to fill 50% each */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Label styling */
+.labels {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+/* Input and Select styling */
+.form-group input, 
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Important so padding doesn't break the width */
+}
+
+/* Responsive: Stack them on top of each other on mobile */
+@media (max-width: 600px) {
+    .input-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.submit-btn {
+    background-color: #282928; /* Success Green */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    width: 95%;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    margin: 15px auto;
+    transition: all 0.3s ease;
+    display: block;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover Effect: Darkens slightly and lifts up */
+.submit-btn:hover {
+    background-color: #000000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+/* Active Effect: Looks like it's being pressed */
+.submit-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Loading/Disabled state (useful for AJAX) */
+.submit-btn:disabled {
+    background-color: #a5d6a7;
+    cursor: not-allowed;
+}
+
+/* ================================
+   MODAL OVERLAY
+================================ */
+.addTechnicianModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ================================
+   MODAL CONTAINER
+================================ */
+.addTechnicianContent {
+    width: 400px;
+    background: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+    animation: modalFade 0.3s ease;
+}
+
+/* ================================
+   BLACK HEADER STRIP
+================================ */
+.modalHeader {
+    background: #000;
+    color: #fff;
+    padding: 14px 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.modalHeader span {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Close button */
+.modalHeader .close {
+    font-size: 22px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.modalHeader .close:hover {
+    color: #ff4d4d;
+}
+
+/* ================================
+   FORM BODY
+================================ */
+#technicianForm {
+    padding: 22px;
+}
+
+.labels {
+    display: block;
+    margin-bottom: 6px;
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #444;
+}
+
+/* Inputs & Select */
+#technicianForm input,
+#technicianForm select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.2s;
+    outline: none;
+}
+
+#technicianForm input:focus,
+#technicianForm select:focus {
+    border-color: #000;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+}
+
+/* ================================
+   SUBMIT BUTTON
+================================ */
+#technicianForm button {
+    margin-top: 18px;
+    width: 100%;
+    padding: 11px;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+#technicianForm button:hover {
+    background: #1f1f1f;
+    transform: translateY(-1px);
+}
+
+/* ================================
+   ANIMATION
+================================ */
+@keyframes modalFade {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ================================
+   MOBILE RESPONSIVE
+================================ */
+@media (max-width: 480px) {
+    .addTechnicianContent {
+        width: 92%;
+    }
+}
+
+
+
+/* Toast notification */
+#toast {
+    visibility: hidden;
+    min-width: 250px;
+    max-width: 400px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 16px;
+    position: fixed;
+    z-index: 10000;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: opacity 0.5s, bottom 0.5s;
+}
+
+/* Show toast */
+#toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px;
+}
+
+.searchbox{
+    width: 100%;
+    padding:10px;
+    margin:1rem auto;
+    border-radius:7px;
+    border: 1px solid rgb(26, 24, 24);
+}
+
+/* ================================
+   MODAL OVERLAY
+================================ */
+.addTechnicianModal {
+    display: none; /* hidden by default */
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55); /* semi-transparent background */
+    backdrop-filter: blur(4px); /* blur behind modal */
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.addTechnicianContent {
+    width: 450px;
+    max-width: 90%;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    animation: modalFade 0.25s ease;
+}
+
+
+.modalHeader {
+    background-color: #000; 
+    color: #fff;
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modalHeader span {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.modalHeader .close {
+    font-size: 22px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.modalHeader .close:hover {
+    color: #ff4d4d;
+}
+
+
+#editUserForm {
+    padding: 20px;
+}
+
+#editUserForm label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+#editUserForm input,
+#editUserForm select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+}
+
+#editUserForm input:focus,
+#editUserForm select:focus {
+    border-color: #000;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+}
+
+/* ================================
+   SUBMIT BUTTON
+================================ */
+#editUserForm button {
+    margin-top: 18px;
+    width: 100%;
+    padding: 11px;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+#editUserForm button:hover {
+    background: #1f1f1f;
+    transform: translateY(-1px);
+}
+
+@keyframes modalFade {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+/* ================================
+   MODAL OVERLAY
+================================ */
+.editMechanicModal {
+    display: none; /* hidden by default */
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55); /* dark overlay */
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* ================================
+   MODAL CONTENT
+================================ */
+.modal-content {
+    width: 400px;
+    max-width: 90%;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    animation: modalFade 0.25s ease;
+}
+
+/* ================================
+   BLACK HEADER STRIP
+================================ */
+.modal-content h3 {
+    background-color: #000; /* black strip */
+    color: #fff;
+    margin: 0;
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* ================================
+   FORM BODY
+================================ */
+#editMechanicForm {
+    padding: 20px;
+}
+
+#editMechanicForm label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+#editMechanicForm input,
+#editMechanicForm select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+}
+
+#editMechanicForm input:focus,
+#editMechanicForm select:focus {
+    border-color: #000;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+}
+
+/* ================================
+   BUTTONS
+================================ */
+#editMechanicForm button[type="submit"] {
+    margin-top: 18px;
+    width: 100%;
+    padding: 11px;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+#editMechanicForm button[type="submit"]:hover {
+    background: #1f1f1f;
+    transform: translateY(-1px);
+}
+
+#editMechanicForm button[type="button"] {
+    margin-top: 10px;
+    width: 100%;
+    padding: 11px;
+    background: #ccc;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+#editMechanicForm button[type="button"]:hover {
+    background: #aaa;
+}
+
+
+
+
+/* Modal overlay */
+.modal {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  display: none;
+  z-index: 1000;
+}
+
+/* Modal box */
+.modal-content {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  max-width: 520px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+/* Black strip header (CSS only) */
+.modal-content::before {
+  content: "Delete Category";
+  display: block;
+  background: #000;
+  color: #fff;
+  padding: 14px 18px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Close button inside black strip */
+.modal-content .close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+th {
+  background: #f4f4f4;
+}
+
+.deleteBtn {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+/* ================================
+   MODAL ANIMATION
+================================ */
+@keyframes modalFade {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ================================
+   MOBILE RESPONSIVE
+================================ */
+@media (max-width: 480px) {
+    .modal-content {
+        width: 92%;
+    }
+}
+
+@media (max-width: 480px) {
+    .addTechnicianContent {
+        width: 92%;
+    }
+}
+
+
+/* Animations */
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes slideDown {
+    from {transform: translateY(-50px);}
+    to {transform: translateY(0);}
+}
+
+.labels{
+    color:black;
+}
+
+/* RESPONSIVE BREAKPOINTS */
+@media(max-width:768px){
+    td, th {
+        font-size: 0.75rem;
+        padding: 8px;
+    }
+    .search-box {
+        font-size: 0.9rem;
+    }
+}

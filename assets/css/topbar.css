@@ -1,0 +1,43 @@
+.topbar {
+  position: sticky;
+  top: 0;               /* sticks at the top */
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+ z-index: 9999;        /* make sure it’s above content */
+}
+
+
+.topbar .toggle {
+  font-size: 22px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  color: var(--text);
+  transition: var(--transition);
+}
+
+.topbar .toggle:hover {
+  background: rgba(212, 194, 106, 0.2);
+  color: var(--accent);
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.topbar .logo {
+  margin-left: auto;
+}
+
+.topbar .logo-img {
+  height: 38px;
+  filter: brightness(1.1);
+}

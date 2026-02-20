@@ -1,0 +1,226 @@
+
+:root {
+  --sidebar-bg: #1a1a1a;      
+  --sidebar-hover-bg: #d4c26a;   
+  --sidebar-text: #ffffff;     
+  --sidebar-muted: #b3b3b3;      
+  --sidebar-border: #333333;      
+  --sidebar-footer-bg: #141414;  
+  --sidebar-active-border: #d4c26a;
+  --sidebar-transition: all 0.3s ease;
+}
+
+/* Main Sidebar Container */
+#sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 230px;
+  height: 100%;
+  background-color: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: width 0.3s ease;
+  z-index: 100;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  transition: width 0.3s ease;
+}
+  
+#sidebar.hidden {
+  width: 0;
+  overflow: hidden;
+}
+
+/* Logo Section */
+.sidebar-logo {
+  text-align: center;
+  padding: 20px 0 10px;
+  transition: var(--sidebar-transition);
+}
+
+.sidebar-logo img {
+  margin-top: 40px;
+  width: 150px;
+  transition: width 0.3s ease;
+}
+
+#sidebar.hidden .sidebar-logo img {
+  width: 45px;
+}
+
+/* Center Content */
+.sidebar-center {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+/* Menu List */
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+
+}
+
+.sidebar-menu li {
+  position: relative;
+  margin: 8px 0;
+}
+
+/* Menu Links */
+.sidebar-menu a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  color: var(--sidebar-text);
+  text-decoration: none;
+  font-size: 14.5px;
+  font-weight: 500;
+  border-left: 4px solid transparent;
+  position: relative;
+  z-index: 2;
+  transition: var(--sidebar-transition);
+}
+
+/* Hover & Active Background Effect */
+.sidebar-menu li::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 0;
+  right: 0;
+  bottom: -7px;
+  background-color: transparent;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  z-index: 1;
+}
+
+/* Persistent Highlight for Active Page */
+.sidebar-menu li.active a {
+    background-color: var(--sidebar-hover-bg); /* stays yellow */
+    color: #1a1a1a; /* dark text */
+    border-left-color: var(--sidebar-active-border); /* yellow left border */
+}
+
+/* Hover effect still works */
+.sidebar-menu li:hover a {
+    background-color: var(--sidebar-hover-bg);
+    color: #1a1a1a;
+    border-left-color: var(--sidebar-active-border);
+}
+
+/* Remove conflicting pseudo-element for active */
+.sidebar-menu li.active::before {
+    background-color: transparent;
+}
+
+/* Icons */
+.sidebar-menu i {
+  font-size: 20px;
+  width: 25px;
+  text-align: center;
+  transition: var(--sidebar-transition);
+}
+
+/* Footer Section */
+.sidebar-footer {
+  border-top: 1px solid var(--sidebar-border);
+  padding: 14px 20px;
+  background-color: var(--sidebar-footer-bg);
+  transition: var(--sidebar-transition);
+}
+
+.sidebar-footer a {
+  color: var(--sidebar-text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14.5px;
+  font-weight: 500;
+  border-left: 4px solid transparent;
+  transition: var(--sidebar-transition);
+}
+
+.sidebar-footer:hover {
+  background-color: var(--sidebar-hover-bg);
+}
+
+.sidebar-footer:hover a {
+  color: #1a1a1a;
+  border-left-color: var(--sidebar-active-border);
+}
+
+/* Optional: Smooth collapse text hiding */
+#sidebar.hidden .sidebar-menu a span,
+#sidebar.hidden .sidebar-footer a span {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  transition: opacity 0.2s ease 0.1s, width 0s ease 0.3s;
+}
+
+#sidebar .sidebar-menu a span,
+#sidebar .sidebar-footer a span {
+  transition: opacity 0.2s ease;
+}
+
+/* Subtle animations FOR TOPBAR HEADER */
+* {
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+:root {
+  --bg: #fff;
+  --card-bg: #222;
+  --text: #fff;
+  --text-muted: #b3b3b3;
+  --accent: #d4c26a;
+  --accent-hover: #e6d88a;
+  --border: #333;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  --radius: 12px;
+  --transition: all 0.3s ease;
+  --sidebar-width: 230px;
+}
+
+/* Global */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Main Layout */
+.main-content {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  transition: margin-left 0.3s ease; 
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.main-content.expanded {
+  margin-left: 0 !important;
+}
+
+.main-wrapper {
+    transition: width 0.3s ease;
+    width: 100%;
+}
